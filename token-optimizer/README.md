@@ -40,6 +40,8 @@ task boundaries instead of dragging it. Everything in this repo serves those.
 ```
 token-optimizer/
 ├── install.sh                     # copy into ~/.claude or a project's .claude
+├── CATALOG.md                     # vetted public repos to borrow from (curated)
+├── discover.sh                    # re-runnable live GitHub scan → ranked table
 └── dotclaude/                     # mirror of a .claude directory
     ├── settings.json              # always-on token levers
     ├── CLAUDE.md.template         # a lean memory-file template
@@ -152,6 +154,31 @@ the reading. The files here make the good path the default; these habits do the
 rest.
 
 ---
+
+## Discovering more (and keeping this current)
+
+The ecosystem moves fast, so this toolkit ships a **catalog + a live scanner**
+instead of a frozen list:
+
+- **`CATALOG.md`** — a hand-curated shortlist of real, reputable public repos in
+  two buckets: *cut tokens/cost* (CLI proxies like `rtk`, MCP optimizers, context
+  auditors) and *better research/analysis* (skills frameworks, subagent teams).
+  Each entry says what it does, how to adopt it, and how it maps to the tools
+  here. **Star counts are treated as a weak signal** — the catalog is curated by
+  what a repo does, not by its rank.
+- **`discover.sh`** — re-run it to pull **live** stars and last-push dates from
+  GitHub across the relevant search themes, deduped and ranked, as a Markdown
+  table you can paste back into `CATALOG.md`:
+
+  ```bash
+  ./discover.sh --min-stars 300 --pushed 60 > scan.md
+  ./discover.sh --query "claude code research agent" # your own theme
+  ```
+  Needs `jq`; uses `gh` if logged in, else set `GITHUB_TOKEN` to avoid rate
+  limits. Then **vet before adopting** using the checklist at the bottom of
+  `CATALOG.md` (recent commits, license, read what it installs, measure with
+  `/audit-context`). Adopt narrowly — every always-on agent/skill/MCP server you
+  add costs baseline context, which is the opposite of the goal.
 
 ## Sources / further reading
 - [Claude Code Token Optimization: 19 Changes to Cut Costs](https://buildtolaunch.substack.com/p/claude-code-token-optimization)
