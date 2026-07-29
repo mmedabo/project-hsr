@@ -1,0 +1,39 @@
+# <project name>
+
+<!--
+  This is a TEMPLATE for a token-lean CLAUDE.md. Copy it to your project root as
+  CLAUDE.md and fill it in. CLAUDE.md is injected into context on EVERY message,
+  so it is the single most expensive file you own. Rules:
+    - Keep it a lookup table, not a brain dump. Target < 40 lines.
+    - Facts Claude can't guess and needs often. Nothing it can read on demand.
+    - No history, no meeting notes, no long rationale, no full API docs — those
+      belong in real docs that Claude reads only when relevant (or in a Skill).
+    - If a section is only needed sometimes, move it to a Skill so it loads on
+      demand instead of every turn.
+  Delete these comments when you fill it in.
+-->
+
+One-line description of what this is.
+
+## Stack
+- Language / framework / package manager (e.g. TypeScript, Next.js, pnpm)
+- Datastore, key services
+
+## Commands
+- Install: `...`
+- Test: `...`      # the exact command; a single test: `...`
+- Lint/format: `...`
+- Build/run: `...`
+
+## Layout
+- `src/...` — what lives here
+- `...` — what lives here
+<!-- Only the non-obvious map. Don't list every folder. -->
+
+## Conventions
+- The 3–5 rules that are easy to get wrong here (naming, error handling,
+  where new X goes). Not general good-practice advice.
+
+## Output
+- Be terse. Answer/patch first, explain only the non-obvious. (Redundant if you
+  use the Terse output style, but cheap insurance.)

@@ -1,0 +1,9 @@
+{
+  "outputStyle": "Terse",
+  "cleanupPeriodDays": 15,
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "haiku",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+    "MAX_MCP_OUTPUT_TOKENS": "10000"
+  }
+}
