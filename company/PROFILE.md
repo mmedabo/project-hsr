@@ -24,8 +24,8 @@ Build AI and regular software products/apps and sell them with support services.
 **Portfolio / pipeline:**
 | Product | What it is | Target user | Stage (reviewed 2026-08-03) |
 |---------|-----------|-------------|-------|
-| Pianio | Piano / music learning app | Learners (consumer) | ~60–70% built. **Repo not yet located** — founder to share URL. |
-| Form Coach | Privacy-first PWA: sport training + **on-device computer-vision** form coach (volleyball live; tennis/basketball/soccer queued). Python R&D `analysis/` folder (ball/rally trackers). | Athletes / trainees (consumer); gov innovation story | ~60% MVP. Repo `mmedabo/formcoach` (a `form-coach-deluxe` variant also exists — confirm active one). Remaining: finish CV model + more sports. Positioned for **Singapore gov startup / tech-innovation** grant angle. |
+| Pianio | Piano / music learning app (user side + admin side) | Learners (consumer) + admin | ~60–70% built. Designed in **Claude Design**, implemented in a **Claude Code session** (user + admin sides). **Not in an accessible GitHub repo yet** — needs to be pushed to a repo (or code shared) before engineering can review it. |
+| Form Coach | Privacy-first PWA: sport training + **on-device computer-vision** form coach (volleyball live; tennis/basketball/soccer queued). Python R&D `analysis/` folder (ball/rally trackers). | Athletes / trainees (consumer); gov innovation story | ~60% MVP. **Active repo: `mmedabo/formcoach`** (confirmed; ignore `form-coach-deluxe`). Remaining: finish CV model + more sports. Positioned for **Singapore gov startup / tech-innovation** grant angle. |
 | Agent Firewall | Local-first **security scanner + runtime firewall** for AI agents/skills/MCP servers. Maps to OWASP LLM/Agentic + MITRE ATLAS. | Developers / security teams (open-source community) | **Mature — v1.3.0, "Production/Stable"**, 27 modules, 170 tests, CI. Repo `mmedabo/AgentFirewall`. **Open source, not for sale — company credibility asset.** |
 | _More ideas_ | Ongoing brainstorm — capture here as they firm up | | Idea |
 
@@ -41,9 +41,12 @@ across Singapore and the broader SEA / Asia-Pacific region.
 - [TODO — get the actual product list + what "AI-orchestrated services" covers]
 - **Target markets:** Singapore first, then broader SEA / Asia-Pacific.
 - [TODO — commercial model: reseller margin / referral / exclusivity / licensing?]
-- **Status:** inbound partnership opportunity, not yet signed. Needs due diligence
-  + a term sheet before any market commitment. Founder is keen for this to be a
-  **major focus** (overriding the earlier "distribution is later" stance).
+- **Status (2026-08-03):** Founder has **already met the CEO of Blue Cloud
+  Softech** and is **confident the partnership will happen**. Next: Blue Cloud is
+  providing **product demos**; founder will then run a **business analysis** of
+  their offerings. **This is a designated MAJOR strategic asset / focus for
+  Evolta** — not a "later" bet. Still to formalize: term sheet (margin,
+  exclusivity, customer ownership, support, targets, IP, PDPA/data residency).
 
 ## 3. Customers
 - **Line 1 — consumer apps (Pianio, Sport Form Coach):** individual learners /
