@@ -10,9 +10,11 @@
   (SEA).
 - **Industry / category:** Software — product development studio + software
   distribution / reseller.
-- **Stage:** Early — building the product portfolio and the distribution motion.
-  [TODO — confirm: pre-revenue? any live/paying products yet?]
-- **Website / handles:** [TODO]
+- **Stage:** Early — three products in build (one near-MVP, one live open-source
+  credibility project, one piano app in progress) + an inbound distribution
+  partnership opportunity. [TODO — confirm pre-revenue? any paying users yet?]
+- **Website / handles:** [TODO]  (note: `mmedabo/Evolta` and `striris/Evolta`
+  repos exist — confirm which is the company site/home)
 
 ## 2. Business lines
 
@@ -20,24 +22,28 @@
 Build AI and regular software products/apps and sell them with support services.
 
 **Portfolio / pipeline:**
-| Product | What it is | Target user | Stage |
+| Product | What it is | Target user | Stage (reviewed 2026-08-03) |
 |---------|-----------|-------------|-------|
-| Pianio | Piano / music learning app | Learners (consumer) [confirm] | [TODO] |
-| Sport Form Coach | App that coaches athletic form/technique | Athletes / trainees (consumer) [confirm] | [TODO] |
-| Agent Firewall | [TODO — describe: security / guardrails for AI agents?] | [TODO — likely B2B] | [TODO] |
+| Pianio | Piano / music learning app | Learners (consumer) | ~60–70% built. **Repo not yet located** — founder to share URL. |
+| Form Coach | Privacy-first PWA: sport training + **on-device computer-vision** form coach (volleyball live; tennis/basketball/soccer queued). Python R&D `analysis/` folder (ball/rally trackers). | Athletes / trainees (consumer); gov innovation story | ~60% MVP. Repo `mmedabo/formcoach` (a `form-coach-deluxe` variant also exists — confirm active one). Remaining: finish CV model + more sports. Positioned for **Singapore gov startup / tech-innovation** grant angle. |
+| Agent Firewall | Local-first **security scanner + runtime firewall** for AI agents/skills/MCP servers. Maps to OWASP LLM/Agentic + MITRE ATLAS. | Developers / security teams (open-source community) | **Mature — v1.3.0, "Production/Stable"**, 27 modules, 170 tests, CI. Repo `mmedabo/AgentFirewall`. **Open source, not for sale — company credibility asset.** |
 | _More ideas_ | Ongoing brainstorm — capture here as they firm up | | Idea |
 
 ### Line 2 — Software Distribution in Singapore & SEA ("Blue Cloud Soft Tech")
 Retail / distribution of AI software products into the Singapore and SEA market.
 Plan: establish **partner agreements** to market and distribute software solutions
-across Singapore and the broader SEA region.
+across Singapore and the broader SEA / Asia-Pacific region.
 
-- [TODO — clarify: is "Blue Cloud Soft Tech" an Evolta brand/entity, or a partner
-  company whose products we distribute (or both)?]
-- [TODO — which software products / vendors to distribute first?]
-- [TODO — target SEA markets in priority order (Singapore first, then…?)]
-- [TODO — commercial model: reseller margin / referral / white-label / licensing?]
-- [TODO — any partners or agreements already in progress?]
+- **Blue Cloud Soft Tech** = a **separate company** (a partner, not an Evolta
+  entity) that has AI-orchestrated software/services and an interest in expanding
+  into Singapore & APAC. They have offered Evolta a **reseller / distribution
+  partnership** for those AI-orchestrated services. [confirm details]
+- [TODO — get the actual product list + what "AI-orchestrated services" covers]
+- **Target markets:** Singapore first, then broader SEA / Asia-Pacific.
+- [TODO — commercial model: reseller margin / referral / exclusivity / licensing?]
+- **Status:** inbound partnership opportunity, not yet signed. Needs due diligence
+  + a term sheet before any market commitment. Founder is keen for this to be a
+  **major focus** (overriding the earlier "distribution is later" stance).
 
 ## 3. Customers
 - **Line 1 — consumer apps (Pianio, Sport Form Coach):** individual learners /
