@@ -5,9 +5,10 @@
 
 ## 1. What Evolta is
 - **One-line description:** Evolta is a software company that (1) builds and sells
-  its own AI and traditional software products with support services, and (2)
+  its own AI and traditional software products with support services, (2)
   markets and distributes AI software products into Singapore and Southeast Asia
-  (SEA).
+  (SEA), and (3) runs **Evolta.AI** — a free, non-profit learning platform of
+  interactive games and articles teaching real concepts to everyone.
 - **Industry / category:** Software — product development studio + software
   distribution / reseller.
 - **Stage:** Early — three products in build (one near-MVP, one live open-source
@@ -47,6 +48,43 @@ across Singapore and the broader SEA / Asia-Pacific region.
   their offerings. **This is a designated MAJOR strategic asset / focus for
   Evolta** — not a "later" bet. Still to formalize: term sheet (margin,
   exclusivity, customer ownership, support, targets, IP, PDPA/data residency).
+
+### Line 3 — Evolta.AI: free learning (non-profit / mission)
+**Live at [evolta.ai](https://evolta.ai)** — the original Evolta content: free,
+interactive **learning games, simulations and articles** that teach real concepts.
+Bilingual **English / 中文**. Static site, no paywall, no login.
+
+- **Tagline:** *"learn, play, evolve"*
+- **Product promise:** *"learning is a right, not a privilege"* — everything free.
+- **Philosophy (verbatim from the site):** *"Never in history has knowledge been so
+  easy to access. The only wall stopping you is your desire to learn. We help you
+  break that wall and evolve with a smile."*
+- **Positioning:** AI-powered software products supporting learning, skill
+  development and performance improvement through interactive educational games,
+  simulations and training tools **for everyone**.
+- **Repo:** `striris/Evolta` (site source, CNAME → evolta.ai); fork at `mmedabo/Evolta`.
+- **Contact:** hello@evolta.ai · mailing list on site.
+
+**Catalogue (16 pages live):**
+| Domain | Titles |
+|--------|--------|
+| Trading & markets | Trading Sandbox portal · *Peak & Dispatch* (power trading) · *Sweet Spread* (sugar) · *The Spread* (market making) · *Safe Harbor* (portfolio hedging) |
+| Finance | *The Ledger* — corporate finance academy, 10 chapters (statements, ratios, Du Pont, Modigliani–Miller, WACC) |
+| Energy | *LNG Academy* — 8-chapter junior-trader voyage w/ mentor + badges · *First Cargo* capstone simulator |
+| Maths & stats | *Quick Math* · *Shape Quest* (4 geometry games) · **StatLab — AI Fundamentals** (7 levels + boss round, HintBot) |
+| Science | *Collision* — momentum & energy lab |
+| Humanities & fun | *Aporia* (philosophy personality quiz) · *Atlas* (city match) · *Reversi* (flip chess, AI opponent) |
+
+**Governance / people — [TODO confirm]:** the site lists **Xinran Liu as Founder**,
+with **Madhav Medaboina as a Contributor (StatLab — AI Fundamentals)**, plus
+contributors Bangyuan Zhu (Reversi) and Qingyi He (Collision).
+→ **Clarify the relationship between Evolta.AI (this collaborative learning
+project) and Evolta the company** — same entity, sister non-profit, or separate?
+This determines who owns the brand, the IP, and how a non-profit arm is structured.
+
+**Strategic role:** mission + brand + top-of-funnel credibility. Free by design —
+it is **not** a revenue line. Feeds the company's reputation (and the Singapore
+innovation story) the same way Agent Firewall does.
 
 ## 3. Customers
 - **Line 1 — consumer apps (Pianio, Sport Form Coach):** individual learners /

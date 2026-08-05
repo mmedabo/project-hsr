@@ -261,6 +261,60 @@
     border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
   .prod .meta a:hover { color: var(--accent); }
 
+  /* ---------- mission / evolta.ai ---------- */
+  .mission {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 3px solid var(--good);
+    border-radius: var(--r); padding: 22px; box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .mission-top { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+  .mission-top > div:first-child { flex: 1; min-width: 240px; }
+  .mission .k {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent-ink);
+  }
+  .mission .creed {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(19px, 2.6vw, 25px); letter-spacing: -.02em;
+    margin: 7px 0 0; text-wrap: balance;
+  }
+  .mission .philo {
+    margin: 14px 0 0; max-width: 72ch; font-size: 14px;
+    color: var(--ink-soft); font-style: italic;
+    border-left: 2px solid var(--border-strong); padding-left: 14px;
+  }
+  .mission-stats {
+    display: flex; flex-wrap: wrap; gap: 10px 30px; margin-top: 18px;
+    padding-top: 16px; border-top: 1px dashed var(--border-strong);
+  }
+  .mission-stats > div { display: flex; flex-direction: column; }
+  .mission-stats b {
+    font-family: var(--font-display); font-weight: 800; font-size: 20px;
+    letter-spacing: -.02em; font-variant-numeric: tabular-nums;
+  }
+  .mission-stats span {
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--muted); margin-top: 1px;
+  }
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cat {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 16px; box-shadow: var(--shadow);
+  }
+  .cat h4 {
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent-ink); margin: 0 0 10px;
+  }
+  .cat ul { margin: 0; padding: 0; list-style: none; display: flex;
+    flex-direction: column; gap: 7px; }
+  .cat li { font-size: 13px; color: var(--ink); display: flex; gap: 8px; align-items: baseline; }
+  .cat li i {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+    flex: none; font-style: normal; transform: translateY(-2px);
+  }
+  .cat li span { color: var(--muted); font-size: 12px; }
+
   /* ---------- roadmap ---------- */
   .northstar {
     background: var(--card); border: 1px solid var(--border);
@@ -352,8 +406,9 @@
       <span class="eyebrow">Company OS v1.0 — live snapshot · 2026-08-05</span>
       <h1>A company run by <span class="o">AI departments.</span></h1>
       <p class="lead">Evolta operates as an AI company: each business function is a Claude-powered agent,
-        coordinated by a CEO agent. Two engines — a <b>software product studio</b> and an
-        <b>AI-software distribution business</b> for Singapore &amp; Southeast Asia.</p>
+        coordinated by a CEO agent. Three engines — a <b>software product studio</b>, an
+        <b>AI-software distribution business</b> for Singapore &amp; Southeast Asia, and
+        <b>Evolta.AI</b>, a free non-profit learning platform.</p>
 
       <div class="pipeline" aria-label="Company operating loop">
         <span class="step"><span class="n">01</span> Plan</span><span class="arrow">→</span>
@@ -374,9 +429,9 @@
           <div class="note">CEO + 6 functions, all online</div>
         </div>
         <div class="tile">
-          <div class="k">Products &amp; assets</div>
-          <div class="v">4</div>
-          <div class="note">1 live · 1 building · 1 blocked · 1 in deal</div>
+          <div class="k">Business lines</div>
+          <div class="v">3</div>
+          <div class="note">Studio · Distribution · Non-profit</div>
         </div>
         <div class="tile">
           <div class="k">Lead focus — quarter</div>
@@ -401,6 +456,29 @@
     <section class="reveal">
       <div class="sec-head"><h2>Portfolio &amp; assets</h2><span class="count">reviewed 2026-08-03</span></div>
       <div class="prod-grid" id="prodGrid"></div>
+    </section>
+
+    <!-- EVOLTA.AI — NON-PROFIT LEARNING -->
+    <section class="reveal">
+      <div class="sec-head"><h2>Evolta.AI — free learning</h2><span class="count">Line 3 · non-profit · live</span></div>
+      <div class="mission">
+        <div class="mission-top">
+          <div>
+            <div class="k">learn, play, evolve</div>
+            <p class="creed">“Learning is a right, not a privilege.”</p>
+          </div>
+          <span class="chip good"><span class="cd"></span>Live · evolta.ai</span>
+        </div>
+        <p class="philo">“Never in history has knowledge been so easy to access. The only wall stopping
+          you is your desire to learn. We help you break that wall and evolve with a smile.”</p>
+        <div class="mission-stats">
+          <div><b>16</b><span>interactive titles</span></div>
+          <div><b>EN / 中文</b><span>bilingual</span></div>
+          <div><b>Free</b><span>no paywall, no login</span></div>
+          <div><b>5</b><span>contributors</span></div>
+        </div>
+      </div>
+      <div class="cat-grid" id="catGrid"></div>
     </section>
 
     <!-- ROADMAP -->
@@ -434,7 +512,7 @@
     <div class="wrap foot-inner">
       <span><span class="caret">&gt;_</span> COMPANY OS v1.0 — BUILDING THE FUTURE</span>
       <span>Source: mmedabo/project-hsr · branch claude/evolta-multi-agent-setup-ni1ugm</span>
-      <span>Snapshot reflects founder's current direction (distribution = major asset)</span>
+      <span>3 lines: Product Studio · Distribution (SG/SEA) · Evolta.AI non-profit learning</span>
     </div>
   </footer>
 </main>
@@ -504,7 +582,11 @@
     { name:'Blue Cloud distribution', tag:'Line 2 · major strategic asset', edge:'var(--accent)',
       chip:'In deal · high confidence', chipCls:'lead', pct:35,
       desc:'Reseller / distribution partnership with Blue Cloud Softech to bring AI-orchestrated software into Singapore & APAC. Founder has met their CEO; demos incoming; business analysis + term sheet next. Not yet signed.',
-      meta:[['market','Singapore → SEA / APAC'],['next','Evaluate demos → term sheet']] }
+      meta:[['market','Singapore → SEA / APAC'],['next','Evaluate demos → term sheet']] },
+    { name:'Evolta.AI', tag:'Line 3 · non-profit learning platform', edge:'var(--good)',
+      chip:'Live · 16 titles', chipCls:'good', pct:100,
+      desc:'Free interactive learning games & simulations teaching trading, finance, energy, maths, statistics, physics and philosophy. Bilingual EN/中文, no paywall or login. The mission engine — brand and credibility, not revenue.',
+      meta:[['site','evolta.ai','https://evolta.ai'],['repo','striris/Evolta','https://github.com/striris/Evolta']] }
   ];
   const roadmap = [
     { n:1, p:'Blue Cloud demo evaluation → business analysis (rank which products to lead with in SG)', owners:['operations','finance'], st:'Ready — awaiting demos', stCls:'warn' },
@@ -513,11 +595,34 @@
     { n:4, p:'Agent Firewall as a live credibility proof point (maintain, don\'t monetize)', owners:['engineering','marketing'], st:'Ongoing', stCls:'good' },
     { n:5, p:'Pianio unblock → push to a repo → go/hold decision', owners:['engineering'], st:'Blocked', stCls:'bad' }
   ];
+  const catalogue = [
+    { d:'Trading & markets', items:[
+      ['Trading Sandbox','portal'],['Peak &amp; Dispatch','power trading'],
+      ['Sweet Spread','sugar trading'],['The Spread','market making'],
+      ['Safe Harbor','portfolio hedging']] },
+    { d:'Energy', items:[
+      ['LNG Academy','8 chapters · mentor + badges'],
+      ['First Cargo','capstone simulator']] },
+    { d:'Finance', items:[
+      ['The Ledger','10 chapters: statements, Du Pont, M&amp;M, WACC']] },
+    { d:'Maths & statistics', items:[
+      ['StatLab — AI Fundamentals','7 levels + boss round · HintBot'],
+      ['Quick Math','speed &amp; estimation'],
+      ['Shape Quest','4 geometry games']] },
+    { d:'Science', items:[
+      ['Collision','momentum &amp; energy lab']] },
+    { d:'Humanities & strategy', items:[
+      ['Aporia','philosophy personality quiz'],
+      ['Atlas','city match · 16 cities'],
+      ['Reversi','flip chess · AI opponent']] }
+  ];
   const awaiting = [
     { t:'Blue Cloud product list + demo access', s:'Unblocks the business analysis (P1)' },
     { t:'Pianio repo — push the code to GitHub', s:'Unblocks review + backup (P5)' },
-    { t:'Founder capacity — solo or team? hours/week?', s:'Sets how aggressive the 4-track plan can be' },
-    { t:'Form Coach grant specifics — scheme + deadline', s:'Drives the P3 milestone date' }
+    { t:'Founder capacity — solo or team? hours/week?', s:'Sets how aggressive the multi-track plan can be' },
+    { t:'Form Coach grant specifics — scheme + deadline', s:'Drives the P3 milestone date' },
+    { t:'Evolta.AI governance — how does it relate to Evolta the company?', s:'Site lists Xinran Liu as Founder, Madhav as Contributor — same entity, sister non-profit, or separate? Determines brand/IP ownership' },
+    { t:'Non-profit structure — register a legal entity?', s:'Affects grants, donations and the Singapore innovation story' }
   ];
 
   // ----- render -----
@@ -541,6 +646,12 @@
       <div class="meta">${p.meta.map(m =>
         `<span>${m[0]}: ${m[2] ? `<a href="${m[2]}" target="_blank" rel="noopener">${m[1]}</a>` : m[1]}</span>`
       ).join('')}</div>
+    </div>`).join('');
+
+  document.getElementById('catGrid').innerHTML = catalogue.map(c => `
+    <div class="cat">
+      <h4>${c.d}</h4>
+      <ul>${c.items.map(i => `<li><i></i><div>${i[0]}<br><span>${i[1]}</span></div></li>`).join('')}</ul>
     </div>`).join('');
 
   document.getElementById('roadmapBody').innerHTML = roadmap.map(r => `
