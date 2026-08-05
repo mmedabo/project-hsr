@@ -1,0 +1,563 @@
+<style>
+  :root {
+    --ground: #f4f2ee;
+    --surface: #fbfaf7;
+    --card: #ffffff;
+    --border: #e6e0d6;
+    --border-strong: #d8d0c2;
+    --ink: #1a1712;
+    --ink-soft: #4a453d;
+    --muted: #7c7268;
+    --accent: #e85d25;
+    --accent-ink: #b8410f;
+    --accent-wash: #fbe9df;
+    --good: #4a9d52;
+    --warn: #c1861f;
+    --bad: #c4402a;
+    --idle: #8a8074;
+
+    --font-display: "Helvetica Neue", "Segoe UI", system-ui, Arial, sans-serif;
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+
+    --maxw: 1120px;
+    --r: 14px;
+    --shadow: 0 1px 2px rgba(30, 22, 12, .04), 0 8px 24px rgba(30, 22, 12, .05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0e0d0c;
+      --surface: #161310;
+      --card: #1d1915;
+      --border: #322b23;
+      --border-strong: #423a2f;
+      --ink: #f3efe8;
+      --ink-soft: #cbc3b7;
+      --muted: #988e81;
+      --accent: #f26a32;
+      --accent-ink: #f88a5b;
+      --accent-wash: #2a1a11;
+      --good: #62b96b;
+      --warn: #ddad48;
+      --bad: #e06a53;
+      --idle: #9a9084;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #f4f2ee; --surface: #fbfaf7; --card: #ffffff; --border: #e6e0d6;
+    --border-strong: #d8d0c2; --ink: #1a1712; --ink-soft: #4a453d; --muted: #7c7268;
+    --accent: #e85d25; --accent-ink: #b8410f; --accent-wash: #fbe9df;
+    --good: #4a9d52; --warn: #c1861f; --bad: #c4402a; --idle: #8a8074;
+    --shadow: 0 1px 2px rgba(30,22,12,.04), 0 8px 24px rgba(30,22,12,.05);
+  }
+  :root[data-theme="dark"] {
+    --ground: #0e0d0c; --surface: #161310; --card: #1d1915; --border: #322b23;
+    --border-strong: #423a2f; --ink: #f3efe8; --ink-soft: #cbc3b7; --muted: #988e81;
+    --accent: #f26a32; --accent-ink: #f88a5b; --accent-wash: #2a1a11;
+    --good: #62b96b; --warn: #ddad48; --bad: #e06a53; --idle: #9a9084;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  .mono { font-family: var(--font-mono); }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- top status bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; gap: 16px;
+    height: 60px;
+  }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand .mark { width: 30px; height: 30px; flex: none; }
+  .brand .name {
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 19px; letter-spacing: -.01em;
+  }
+  .brand .name b { color: var(--accent); }
+  .brand .sub {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .16em; color: var(--muted); text-transform: uppercase;
+    display: block; margin-top: -2px;
+  }
+  .spacer { flex: 1; }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .status .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--good);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 60%, transparent);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 55%, transparent); }
+    70% { box-shadow: 0 0 0 7px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  .toggle {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em;
+    text-transform: uppercase;
+    background: var(--card); color: var(--ink-soft);
+    border: 1px solid var(--border-strong); border-radius: 999px;
+    padding: 7px 13px; cursor: pointer; transition: border-color .15s, color .15s;
+  }
+  .toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 54px 0 30px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(38px, 7vw, 74px);
+    line-height: .96; letter-spacing: -.03em;
+    margin: 14px 0 0; text-wrap: balance;
+  }
+  .hero h1 .o { color: var(--accent); }
+  .hero .lead {
+    margin: 20px 0 0; max-width: 60ch;
+    font-size: clamp(15px, 1.6vw, 18px); color: var(--ink-soft);
+  }
+
+  /* ---------- pipeline ---------- */
+  .pipeline {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 6px;
+    margin-top: 30px; padding: 16px 18px;
+    border: 1px solid var(--border); border-radius: var(--r);
+    background: var(--surface);
+  }
+  .pipeline .step {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  .pipeline .step .n {
+    color: var(--accent); font-weight: 700;
+  }
+  .pipeline .arrow { color: var(--muted); margin: 0 4px; }
+
+  /* ---------- section frame ---------- */
+  section { padding: 40px 0; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; }
+  .sec-head h2 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(20px, 3vw, 27px); letter-spacing: -.02em; margin: 0;
+  }
+  .sec-head .count {
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+  }
+  .rule { height: 1px; background: var(--border); border: 0; margin: 0; }
+
+  /* ---------- mission control tiles ---------- */
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .tile {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 18px; box-shadow: var(--shadow);
+  }
+  .tile .k { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); }
+  .tile .v {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 30px; letter-spacing: -.02em; margin-top: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tile .v small { font-size: 14px; color: var(--muted); font-weight: 700; }
+  .tile .note { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
+
+  /* ---------- departments ---------- */
+  .dept-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  }
+  .dept {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 16px; box-shadow: var(--shadow);
+    transition: transform .16s ease, border-color .16s ease;
+  }
+  .dept:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+  .dept .top { display: flex; align-items: center; gap: 10px; }
+  .dept .ic {
+    width: 34px; height: 34px; flex: none; display: grid; place-items: center;
+    border-radius: 9px; background: var(--accent-wash); color: var(--accent-ink);
+  }
+  .dept .ic svg { width: 18px; height: 18px; }
+  .dept h3 {
+    font-family: var(--font-display); font-weight: 800; font-size: 15px;
+    letter-spacing: .01em; margin: 0; text-transform: uppercase;
+  }
+  .dept .role { font-size: 12.5px; color: var(--muted); margin: 0; }
+  .dept .loop {
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .02em;
+    color: var(--ink-soft); margin-top: 12px; padding-top: 11px;
+    border-top: 1px dashed var(--border-strong);
+  }
+  .dept.lead { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+
+  /* ---------- products ---------- */
+  .prod-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .prod {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 20px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 12px;
+    border-left: 3px solid var(--edge, var(--border-strong));
+  }
+  .prod .phead { display: flex; align-items: flex-start; gap: 12px; }
+  .prod h3 {
+    font-family: var(--font-display); font-weight: 800; font-size: 19px;
+    letter-spacing: -.01em; margin: 0;
+  }
+  .prod .tag {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-top: 2px;
+  }
+  .prod p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px; flex: none;
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .06em;
+    text-transform: uppercase; font-weight: 600;
+    padding: 5px 10px; border-radius: 999px;
+    border: 1px solid var(--border-strong); background: var(--surface);
+    color: var(--ink);
+  }
+  .chip .cd { width: 7px; height: 7px; border-radius: 50%; background: var(--idle); }
+  .chip.good .cd { background: var(--good); }
+  .chip.warn .cd { background: var(--warn); }
+  .chip.bad .cd { background: var(--bad); }
+  .chip.lead .cd { background: var(--accent); }
+  .progress { height: 7px; border-radius: 999px; background: var(--surface);
+    border: 1px solid var(--border); overflow: hidden; }
+  .progress > i { display: block; height: 100%; background: var(--accent);
+    border-radius: 999px; }
+  .prod .meta {
+    display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+    font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+    margin-top: auto;
+  }
+  .prod .meta a { color: var(--accent-ink); text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+  .prod .meta a:hover { color: var(--accent); }
+
+  /* ---------- roadmap ---------- */
+  .northstar {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--r); padding: 20px 22px; box-shadow: var(--shadow);
+    margin-bottom: 18px;
+  }
+  .northstar .k { font-family: var(--font-mono); font-size: 10.5px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); }
+  .northstar p { margin: 8px 0 0; font-size: 15px; color: var(--ink); max-width: 78ch; }
+  .northstar .guard { margin-top: 12px; font-size: 12.5px; color: var(--ink-soft); }
+  .northstar .guard b { color: var(--ink); }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border);
+    border-radius: var(--r); background: var(--card); box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; }
+  th, td { text-align: left; padding: 13px 16px; font-size: 13.5px;
+    border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td .p { font-weight: 600; color: var(--ink); }
+  td .pnum { font-family: var(--font-mono); color: var(--accent-ink); font-weight: 700; }
+  .owner {
+    display: inline-block; font-family: var(--font-mono); font-size: 10.5px;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 2px 7px; margin: 1px 2px 1px 0;
+  }
+
+  /* ---------- awaiting ---------- */
+  .await-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .await {
+    display: flex; gap: 11px; align-items: flex-start;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 11px; padding: 14px 16px;
+  }
+  .await .b { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px;
+    flex: none; background: var(--warn); }
+  .await .t { font-size: 13.5px; color: var(--ink); }
+  .await .t small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--border); margin-top: 20px; padding: 22px 0 46px; }
+  .foot-inner { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center;
+    font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .foot-inner .caret { color: var(--accent); }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(10px); }
+  .reveal.in { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
+
+  @media (max-width: 900px) {
+    .tiles { grid-template-columns: repeat(2, 1fr); }
+    .dept-grid { grid-template-columns: repeat(2, 1fr); }
+    .prod-grid, .await-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .tiles { grid-template-columns: 1fr; }
+    .dept-grid { grid-template-columns: 1fr; }
+    .brand .sub { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .status .dot { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .dept { transition: none; }
+  }
+</style>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand">
+      <svg class="mark" id="mark" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      <div>
+        <span class="name">EVOLTA<b>.</b></span>
+        <span class="sub">AI Company OS</span>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <span class="status"><span class="dot"></span> All systems running</span>
+    <button class="toggle" id="themeToggle" type="button" aria-label="Toggle color theme">Theme</button>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <!-- HERO -->
+    <div class="hero reveal">
+      <span class="eyebrow">Company OS v1.0 — live snapshot · 2026-08-05</span>
+      <h1>A company run by <span class="o">AI departments.</span></h1>
+      <p class="lead">Evolta operates as an AI company: each business function is a Claude-powered agent,
+        coordinated by a CEO agent. Two engines — a <b>software product studio</b> and an
+        <b>AI-software distribution business</b> for Singapore &amp; Southeast Asia.</p>
+
+      <div class="pipeline" aria-label="Company operating loop">
+        <span class="step"><span class="n">01</span> Plan</span><span class="arrow">→</span>
+        <span class="step"><span class="n">02</span> Build</span><span class="arrow">→</span>
+        <span class="step"><span class="n">03</span> Sell</span><span class="arrow">→</span>
+        <span class="step"><span class="n">04</span> Automate</span><span class="arrow">→</span>
+        <span class="step"><span class="n">05</span> Scale</span>
+      </div>
+    </div>
+
+    <!-- MISSION CONTROL -->
+    <section class="reveal">
+      <div class="sec-head"><h2>Mission control</h2></div>
+      <div class="tiles">
+        <div class="tile">
+          <div class="k">Department agents</div>
+          <div class="v">7</div>
+          <div class="note">CEO + 6 functions, all online</div>
+        </div>
+        <div class="tile">
+          <div class="k">Products &amp; assets</div>
+          <div class="v">4</div>
+          <div class="note">1 live · 1 building · 1 blocked · 1 in deal</div>
+        </div>
+        <div class="tile">
+          <div class="k">Lead focus — quarter</div>
+          <div class="v" style="font-size:20px;line-height:1.15;">Blue&nbsp;Cloud<br>distribution</div>
+          <div class="note">Q4 2026 · SG + SEA</div>
+        </div>
+        <div class="tile">
+          <div class="k">Build track cap</div>
+          <div class="v">1<small> / active</small></div>
+          <div class="note">Form Coach only — guardrail</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPARTMENTS -->
+    <section class="reveal">
+      <div class="sec-head"><h2>The departments</h2><span class="count">7 agents · .claude/agents/</span></div>
+      <div class="dept-grid" id="deptGrid"></div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="reveal">
+      <div class="sec-head"><h2>Portfolio &amp; assets</h2><span class="count">reviewed 2026-08-03</span></div>
+      <div class="prod-grid" id="prodGrid"></div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="reveal">
+      <div class="sec-head"><h2>Current focus</h2><span class="count">CEO-owned · Q4 2026</span></div>
+      <div class="northstar">
+        <div class="k">North-star goal</div>
+        <p>Convert the Blue Cloud opportunity into a <b>signed, executable partnership</b> — demo business
+          analysis complete and a founder-ready term sheet on the table — while Form Coach reaches a
+          grant-demoable milestone, Agent Firewall stays a healthy credibility proof point, and Pianio is
+          unblocked into a repo with a go/hold call made.</p>
+        <div class="guard">⚑ Guardrail: <b>only one real build track (Form Coach)</b> gets engineering this
+          quarter — so parallel deep builds can't sink the distribution focus.</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Priority</th><th>Owner</th><th>Status</th></tr></thead>
+          <tbody id="roadmapBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- AWAITING -->
+    <section class="reveal">
+      <div class="sec-head"><h2>Awaiting input</h2><span class="count">unblocks the plan</span></div>
+      <div class="await-grid" id="awaitGrid"></div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <span><span class="caret">&gt;_</span> COMPANY OS v1.0 — BUILDING THE FUTURE</span>
+      <span>Source: mmedabo/project-hsr · branch claude/evolta-multi-agent-setup-ni1ugm</span>
+      <span>Snapshot reflects founder's current direction (distribution = major asset)</span>
+    </div>
+  </footer>
+</main>
+
+<script>
+  // ----- brand starburst -----
+  (function () {
+    const svg = document.getElementById('mark');
+    const ns = 'http://www.w3.org/2000/svg';
+    for (let i = 0; i < 12; i++) {
+      const a = (i * 30) * Math.PI / 180;
+      const ln = document.createElementNS(ns, 'line');
+      ln.setAttribute('x1', 50 + 15 * Math.cos(a));
+      ln.setAttribute('y1', 50 + 15 * Math.sin(a));
+      ln.setAttribute('x2', 50 + 43 * Math.cos(a));
+      ln.setAttribute('y2', 50 + 43 * Math.sin(a));
+      ln.setAttribute('stroke', 'var(--accent)');
+      ln.setAttribute('stroke-width', '8');
+      ln.setAttribute('stroke-linecap', 'round');
+      svg.appendChild(ln);
+    }
+  })();
+
+  // ----- theme toggle -----
+  (function () {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    btn.addEventListener('click', function () {
+      const cur = root.getAttribute('data-theme')
+        || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+    });
+  })();
+
+  // ----- data -----
+  const ICON = {
+    ceo: '<path d="M12 12a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 0114 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
+    eng: '<path d="M9 8l-4 4 4 4m6-8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+    mkt: '<path d="M4 10v4h3l6 4V6L7 10H4zm12 0a3 3 0 010 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+    sales: '<path d="M4 16l5-5 3 3 6-7M15 4h4v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+    fin: '<path d="M12 3v18M8 7h6a2.5 2.5 0 010 5H8a2.5 2.5 0 000 5h7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+    sup: '<path d="M20 12a8 8 0 10-16 0v4a2 2 0 002 2h1v-6H5m14 0h-2v6h1a2 2 0 002-2v-4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    ops: '<path d="M12 9a3 3 0 100 6 3 3 0 000-6zm7 3l2-1-2-4-2 1a6.9 6.9 0 00-2-1V3h-4v2a6.9 6.9 0 00-2 1L5 5 3 9l2 1v2l-2 1 2 4 2-1a6.9 6.9 0 002 1v2h4v-2a6.9 6.9 0 002-1l2 1 2-4-2-1z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>'
+  };
+  const departments = [
+    { ic:'ceo',  name:'CEO',        role:'Strategy & decisions',  loop:'Think → Decide → Delegate → Grow', lead:true },
+    { ic:'eng',  name:'Engineering',role:'Build & deploy',        loop:'Code → Test → Ship → Scale' },
+    { ic:'mkt',  name:'Marketing',  role:'Growth & content',      loop:'Research → Create → Publish → Analyze' },
+    { ic:'sales',name:'Sales',      role:'Leads & pipeline',      loop:'Find → Contact → Meet → Close' },
+    { ic:'fin',  name:'Finance',    role:'Numbers & cash flow',   loop:'Track → Forecast → Decide' },
+    { ic:'sup',  name:'Support',    role:'Customer success',      loop:'Resolve → Retain → Delight' },
+    { ic:'ops',  name:'Operations', role:'Systems & workflows',   loop:'Automate → Monitor → Optimize' }
+  ];
+  const products = [
+    { name:'Agent Firewall', tag:'Open-source · credibility asset', edge:'var(--good)',
+      chip:'Live · v1.3.0', chipCls:'good', pct:100,
+      desc:'Local-first security scanner + runtime firewall for AI agents, skills & MCP servers. Mapped to OWASP LLM/Agentic + MITRE ATLAS. Production/Stable, 27 modules, 170 tests, CI. Not for sale — it earns trust.',
+      meta:[['repo','mmedabo/AgentFirewall (private)','https://github.com/mmedabo/AgentFirewall'],['role','Company credibility']] },
+    { name:'Form Coach', tag:'The one active build track', edge:'var(--warn)',
+      chip:'Building · ~60%', chipCls:'warn', pct:60,
+      desc:'Privacy-first PWA: sport training + on-device computer-vision form coach (volleyball live; more sports queued). Python R&D trackers. Positioned for the Singapore gov startup / tech-innovation grant.',
+      meta:[['repo','mmedabo/formcoach','https://github.com/mmedabo/formcoach'],['next','Finish CV loop + grant story']] },
+    { name:'Pianio', tag:'Piano learning app · user + admin', edge:'var(--bad)',
+      chip:'Blocked', chipCls:'bad', pct:65,
+      desc:'~60–70% built across user & admin sides, designed in Claude Design. Not yet in an accessible Git repo — the code sits in a Claude session. Must be pushed to GitHub before engineering can review or it can ship.',
+      meta:[['repo','— not on GitHub yet —',''],['action','Push to mmedabo/pianio']] },
+    { name:'Blue Cloud distribution', tag:'Line 2 · major strategic asset', edge:'var(--accent)',
+      chip:'In deal · high confidence', chipCls:'lead', pct:35,
+      desc:'Reseller / distribution partnership with Blue Cloud Softech to bring AI-orchestrated software into Singapore & APAC. Founder has met their CEO; demos incoming; business analysis + term sheet next. Not yet signed.',
+      meta:[['market','Singapore → SEA / APAC'],['next','Evaluate demos → term sheet']] }
+  ];
+  const roadmap = [
+    { n:1, p:'Blue Cloud demo evaluation → business analysis (rank which products to lead with in SG)', owners:['operations','finance'], st:'Ready — awaiting demos', stCls:'warn' },
+    { n:2, p:'Term-sheet prep: margin, exclusivity, customer ownership, PDPA (agents draft, founder signs)', owners:['finance','operations'], st:'Queued', stCls:'' },
+    { n:3, p:'Form Coach → grant-ready CV MVP + Singapore innovation story', owners:['engineering','marketing'], st:'In progress', stCls:'warn' },
+    { n:4, p:'Agent Firewall as a live credibility proof point (maintain, don\'t monetize)', owners:['engineering','marketing'], st:'Ongoing', stCls:'good' },
+    { n:5, p:'Pianio unblock → push to a repo → go/hold decision', owners:['engineering'], st:'Blocked', stCls:'bad' }
+  ];
+  const awaiting = [
+    { t:'Blue Cloud product list + demo access', s:'Unblocks the business analysis (P1)' },
+    { t:'Pianio repo — push the code to GitHub', s:'Unblocks review + backup (P5)' },
+    { t:'Founder capacity — solo or team? hours/week?', s:'Sets how aggressive the 4-track plan can be' },
+    { t:'Form Coach grant specifics — scheme + deadline', s:'Drives the P3 milestone date' }
+  ];
+
+  // ----- render -----
+  document.getElementById('deptGrid').innerHTML = departments.map(d => `
+    <div class="dept${d.lead ? ' lead' : ''}">
+      <div class="top">
+        <span class="ic"><svg viewBox="0 0 24 24">${ICON[d.ic]}</svg></span>
+        <div><h3>${d.name}</h3><p class="role">${d.role}</p></div>
+      </div>
+      <div class="loop">${d.loop}</div>
+    </div>`).join('');
+
+  document.getElementById('prodGrid').innerHTML = products.map(p => `
+    <div class="prod" style="--edge:${p.edge}">
+      <div class="phead">
+        <div style="flex:1"><h3>${p.name}</h3><div class="tag">${p.tag}</div></div>
+        <span class="chip ${p.chipCls}"><span class="cd"></span>${p.chip}</span>
+      </div>
+      <p>${p.desc}</p>
+      <div class="progress" aria-label="${p.pct}% complete"><i style="width:${p.pct}%"></i></div>
+      <div class="meta">${p.meta.map(m =>
+        `<span>${m[0]}: ${m[2] ? `<a href="${m[2]}" target="_blank" rel="noopener">${m[1]}</a>` : m[1]}</span>`
+      ).join('')}</div>
+    </div>`).join('');
+
+  document.getElementById('roadmapBody').innerHTML = roadmap.map(r => `
+    <tr>
+      <td><span class="pnum">P${r.n}</span></td>
+      <td><span class="p">${r.p}</span></td>
+      <td>${r.owners.map(o => `<span class="owner">${o}</span>`).join('')}</td>
+      <td><span class="chip ${r.stCls}"><span class="cd"></span>${r.st}</span></td>
+    </tr>`).join('');
+
+  document.getElementById('awaitGrid').innerHTML = awaiting.map(a => `
+    <div class="await"><span class="b"></span><div class="t">${a.t}<small>${a.s}</small></div></div>
+  `).join('');
+
+  // ----- reveal on scroll -----
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
